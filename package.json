@@ -1,13 +1,21 @@
 {
   "name": "angularprojectelectronnew",
-  "version": "0.0.0",
+  "version": "0.0.01",
+  "productName": "ElectronNewAPP",
+  "description": "The best app ever",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "electron-forge start",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron-build": "ng build --prod && npm run electron .",
+    "start:electron": "ng build --base-href ./ && electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make-linux": "npx @electron-forge/cli make --platform linux --targets deb"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +31,8 @@
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
+  "author": "Yogi",
+  "license": "ISC",
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.29",
     "@angular/cli": "~8.3.29",
@@ -43,5 +53,50 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  }
+  ,
+  "build": {
+    "appId": "com.electron13",
+    "compression": "normal",
+    "asar": true,
+    "extends": null,
+    "linux": {
+      "target": [
+        "AppImage",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": "portable"
+    }
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "angularprojectelectronnew"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "icon": "assets/logo.png"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
