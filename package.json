@@ -89,7 +89,7 @@
         {
           "name": "@electron-forge/maker-deb",
           "config": {
-            "icon": "assets/logo.png"
+            "icon": "src/assets/logo.png"
           }
         },
         {
